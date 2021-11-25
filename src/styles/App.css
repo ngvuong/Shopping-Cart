@@ -36,3 +36,36 @@
   border: 1px solid black;
   border-radius: 50%;
 }
+
+.cart {
+  width: 30vw;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: rgb(100, 100, 100);
+  border: 1px solid black;
+  transform: translateX(100%);
+  transition: all 0.3s linear;
+}
+
+.cart.open {
+  transform: translateX(0);
+}
+
+.btn-close-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.overlay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  filter: blur(10px);
+}
