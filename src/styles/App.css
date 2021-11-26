@@ -49,7 +49,7 @@
 }
 
 .cart {
-  width: 30vmax;
+  width: 50vh;
   height: 100vh;
   position: fixed;
   right: 0;
@@ -62,6 +62,11 @@
 
 .cart.open {
   transform: translateX(0);
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
 }
 
 .btn-close-cart {

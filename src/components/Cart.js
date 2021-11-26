@@ -1,10 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function Cart() {
+export default function Cart({ itemCount, products }) {
   const cartRef = useRef();
   const overlayRef = useRef();
-  const [cartItemCount, setCartItemCount] = useState(0);
+  const [cartItemCount, setCartItemCount] = useState(itemCount);
+  useEffect(() => {
+    setCartItemCount(itemCount);
+  }, [itemCount]);
 
+  console.log(cartItemCount);
+  const cartItems = products.map((product) => (
+    <div key={product.id}>{product.name}</div>
+  ));
   return (
     <div>
       <div className="overlay" ref={overlayRef}></div>
@@ -30,6 +37,7 @@ export default function Cart() {
         <h2 className="cart-heading">{`Your Cart ${
           !cartItemCount ? "is empty" : ""
         }`}</h2>
+        <div className="cart-items">{cartItems}</div>
       </div>
     </div>
   );
