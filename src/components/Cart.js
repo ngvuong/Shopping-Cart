@@ -1,22 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Cart({ itemCount, products }) {
+export default function Cart({ cartItemCount, products, onQtyChange }) {
   const cartRef = useRef();
   const overlayRef = useRef();
   const quantityRef = useRef({});
-  const [cartItemCount, setCartItemCount] = useState(itemCount);
-  console.log(quantityRef);
+  const [itemCount, setItemCount] = useState(cartItemCount);
   useEffect(() => {
-    setCartItemCount(itemCount);
-  }, [itemCount]);
+    setItemCount(cartItemCount);
+  }, [cartItemCount]);
 
-  console.log(cartItemCount);
   const cartItems = products.map((product, i) => {
     return (
       <div key={product.id}>
         {product.name}
         <div className="quantity-field">
-          <button onClick={(e) => quantityRef.current[i].stepDown()}>
+          <button
+            onClick={(e) => {
+              if (quantityRef.current[i].value > 0) {
+                setItemCount(itemCount - 1);
+                onQtyChange(itemCount - 1);
+              }
+              quantityRef.current[i].stepDown();
+            }}
+          >
             &minus;
           </button>
           <input
@@ -25,7 +31,13 @@ export default function Cart({ itemCount, products }) {
             defaultValue="1"
             ref={(el) => (quantityRef.current[i] = el)}
           />
-          <button onClick={(e) => quantityRef.current[i].stepUp()}>
+          <button
+            onClick={(e) => {
+              setItemCount(itemCount + 1);
+              quantityRef.current[i].stepUp();
+              onQtyChange(itemCount + 1);
+            }}
+          >
             &#43;
           </button>
         </div>
@@ -42,7 +54,7 @@ export default function Cart({ itemCount, products }) {
           cartRef.current.classList.add("open");
         }}
       >
-        Cart {cartItemCount}
+        Cart {itemCount}
       </div>
       <div className="cart" ref={cartRef}>
         <span
@@ -55,7 +67,7 @@ export default function Cart({ itemCount, products }) {
           &#10006;
         </span>
         <h2 className="cart-heading">{`Your Cart ${
-          !cartItemCount ? "is empty" : ""
+          !itemCount ? "is empty" : ""
         }`}</h2>
         <div className="cart-items">{cartItems}</div>
       </div>

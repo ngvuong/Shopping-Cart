@@ -34,7 +34,11 @@ export default function Shop() {
   return (
     <div>
       Shop
-      <Cart itemCount={cartItemCount} products={cartItems} />
+      <Cart
+        cartItemCount={cartItemCount}
+        products={cartItems}
+        onQtyChange={(qty) => setCartItemCount(qty)}
+      />
       <div className="product-list">{productList}</div>
     </div>
   );
