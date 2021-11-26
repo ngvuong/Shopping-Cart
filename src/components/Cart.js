@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function Cart() {
   const cartRef = useRef();
   const overlayRef = useRef();
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   return (
     <div>
@@ -14,7 +15,7 @@ export default function Cart() {
           cartRef.current.classList.add("open");
         }}
       >
-        Cart
+        Cart {cartItemCount}
       </div>
       <div className="cart" ref={cartRef}>
         <span
@@ -26,6 +27,9 @@ export default function Cart() {
         >
           &#10006;
         </span>
+        <h2 className="cart-heading">{`Your Cart ${
+          !cartItemCount ? "is empty" : ""
+        }`}</h2>
       </div>
     </div>
   );

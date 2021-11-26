@@ -83,6 +83,20 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.product-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5vw;
+  margin: 5vmax;
+}
+
+.product-card {
+  width: 10rem;
+  height: 15rem;
+  border: 1px solid black;
+}
+
 @media screen and (max-width: 400px) {
   .nav-links {
     flex-direction: column;
