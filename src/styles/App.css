@@ -77,6 +77,22 @@
   cursor: pointer;
 }
 
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.quantity-field input {
+  width: 10%;
+  font-size: 2rem;
+  text-align: center;
+  background: none;
+  border: none;
+}
+
+.quantity-field button {
+  font-size: 2rem;
+}
+
 .overlay {
   position: fixed;
   top: 0;

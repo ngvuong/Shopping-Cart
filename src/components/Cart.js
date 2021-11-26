@@ -3,15 +3,35 @@ import React, { useEffect, useRef, useState } from "react";
 export default function Cart({ itemCount, products }) {
   const cartRef = useRef();
   const overlayRef = useRef();
+  const quantityRef = useRef({});
   const [cartItemCount, setCartItemCount] = useState(itemCount);
+  console.log(quantityRef);
   useEffect(() => {
     setCartItemCount(itemCount);
   }, [itemCount]);
 
   console.log(cartItemCount);
-  const cartItems = products.map((product) => (
-    <div key={product.id}>{product.name}</div>
-  ));
+  const cartItems = products.map((product, i) => {
+    return (
+      <div key={product.id}>
+        {product.name}
+        <div className="quantity-field">
+          <button onClick={(e) => quantityRef.current[i].stepDown()}>
+            &minus;
+          </button>
+          <input
+            type="number"
+            min="0"
+            defaultValue="1"
+            ref={(el) => (quantityRef.current[i] = el)}
+          />
+          <button onClick={(e) => quantityRef.current[i].stepUp()}>
+            &#43;
+          </button>
+        </div>
+      </div>
+    );
+  });
   return (
     <div>
       <div className="overlay" ref={overlayRef}></div>
