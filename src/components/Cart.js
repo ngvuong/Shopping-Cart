@@ -5,6 +5,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
   const overlayRef = useRef();
   const quantityRef = useRef({});
   const [itemCount, setItemCount] = useState(cartItemCount);
+
   useEffect(() => {
     setItemCount(cartItemCount);
   }, [cartItemCount]);
@@ -20,12 +21,22 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
         <div className="quantity-field">
           <button
             onClick={(e) => {
+              if (productCount - 1 === 0) {
+                sessionStorage.removeItem(`${product.name}`);
+                const newCart = items.filter(
+                  (item) => item.name !== product.name
+                );
+                sessionStorage.setItem("cart", JSON.stringify(newCart));
+                console.log(productCount);
+              }
               if (quantityRef.current[i].value > 0) {
                 setItemCount(itemCount - 1);
                 onQtyChange(itemCount - 1);
                 sessionStorage.setItem("count", itemCount - 1);
                 sessionStorage.setItem(`${product.name}`, productCount - 1);
+                console.log("triggered");
               }
+
               quantityRef.current[i].stepDown();
             }}
           >
