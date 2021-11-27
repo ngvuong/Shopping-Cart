@@ -12,6 +12,8 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
   const items = JSON.parse(sessionStorage.getItem("cart")) || products;
 
   const cartItems = items.map((product, i) => {
+    const productCount = parseInt(sessionStorage.getItem(`${product.name}`));
+
     return (
       <div key={product.id}>
         {product.name}
@@ -22,7 +24,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                 setItemCount(itemCount - 1);
                 onQtyChange(itemCount - 1);
                 sessionStorage.setItem("count", itemCount - 1);
-                sessionStorage.setItem(`${product.name}`, itemCount - 1);
+                sessionStorage.setItem(`${product.name}`, productCount - 1);
               }
               quantityRef.current[i].stepDown();
             }}
@@ -41,7 +43,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
               quantityRef.current[i].stepUp();
               onQtyChange(itemCount + 1);
               sessionStorage.setItem("count", itemCount + 1);
-              sessionStorage.setItem(`${product.name}`, itemCount + 1);
+              sessionStorage.setItem(`${product.name}`, productCount + 1);
             }}
           >
             &#43;
