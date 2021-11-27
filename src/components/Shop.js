@@ -9,15 +9,22 @@ const products = [
 ];
 
 export default function Shop() {
-  const [cartItemCount, setCartItemCount] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
+  const itemCountInStore = parseInt(sessionStorage.getItem("count"));
+  const cartItemsInStore = JSON.parse(sessionStorage.getItem("cart"));
+  const [cartItemCount, setCartItemCount] = useState(itemCountInStore || 0);
+  const [cartItems, setCartItems] = useState(cartItemsInStore || []);
 
   const addItem = (product) => {
-    if (!cartItems.includes(product)) {
+    const isInCart = cartItems.some((item) => item.id === product.id);
+    if (!isInCart) {
       setCartItems((items) => {
-        return [...items, product];
+        const newCart = [...items, product];
+        sessionStorage.setItem("cart", JSON.stringify(newCart));
+        sessionStorage.setItem(`${product.name}`, 1);
+        return newCart;
       });
       setCartItemCount(cartItemCount + 1);
+      sessionStorage.setItem("count", cartItemCount + 1);
     }
   };
 

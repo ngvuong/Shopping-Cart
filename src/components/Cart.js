@@ -9,7 +9,9 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
     setItemCount(cartItemCount);
   }, [cartItemCount]);
 
-  const cartItems = products.map((product, i) => {
+  const items = JSON.parse(sessionStorage.getItem("cart")) || products;
+
+  const cartItems = items.map((product, i) => {
     return (
       <div key={product.id}>
         {product.name}
@@ -19,6 +21,8 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
               if (quantityRef.current[i].value > 0) {
                 setItemCount(itemCount - 1);
                 onQtyChange(itemCount - 1);
+                sessionStorage.setItem("count", itemCount - 1);
+                sessionStorage.setItem(`${product.name}`, itemCount - 1);
               }
               quantityRef.current[i].stepDown();
             }}
@@ -28,7 +32,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           <input
             type="number"
             min="0"
-            defaultValue="1"
+            defaultValue={sessionStorage.getItem(`${product.name}`) || 1}
             ref={(el) => (quantityRef.current[i] = el)}
           />
           <button
@@ -36,6 +40,8 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
               setItemCount(itemCount + 1);
               quantityRef.current[i].stepUp();
               onQtyChange(itemCount + 1);
+              sessionStorage.setItem("count", itemCount + 1);
+              sessionStorage.setItem(`${product.name}`, itemCount + 1);
             }}
           >
             &#43;
@@ -44,6 +50,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
       </div>
     );
   });
+
   return (
     <div>
       <div className="overlay" ref={overlayRef}></div>
