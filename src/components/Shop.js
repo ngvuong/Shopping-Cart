@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cart from "./Cart";
 import Product from "./Product";
 
@@ -13,12 +13,10 @@ export default function Shop() {
   const cartItemsInStore = JSON.parse(sessionStorage.getItem("cart")) || [];
   const [cartItemCount, setCartItemCount] = useState(itemCountInStore || 0);
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItemsInStore);
 
   const addItem = (product) => {
     setCartItems(cartItemsInStore);
     const isInCart = cartItemsInStore.some((item) => item.id === product.id);
-    console.log(cartItems);
     if (!isInCart) {
       setCartItems((items) => {
         const newCart = [...items, product];

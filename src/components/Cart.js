@@ -27,14 +27,12 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                   (item) => item.name !== product.name
                 );
                 sessionStorage.setItem("cart", JSON.stringify(newCart));
-                console.log(productCount);
               }
               if (quantityRef.current[i].value > 0) {
                 setItemCount(itemCount - 1);
                 onQtyChange(itemCount - 1);
                 sessionStorage.setItem("count", itemCount - 1);
                 sessionStorage.setItem(`${product.name}`, productCount - 1);
-                console.log("triggered");
               }
 
               quantityRef.current[i].stepDown();
@@ -42,12 +40,14 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           >
             &minus;
           </button>
+
           <input
             type="number"
             min="0"
             defaultValue={sessionStorage.getItem(`${product.name}`) || 1}
             ref={(el) => (quantityRef.current[i] = el)}
           />
+
           <button
             onClick={(e) => {
               setItemCount(itemCount + 1);
