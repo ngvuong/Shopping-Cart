@@ -8,7 +8,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* background-color: aquamarine; */
+  background-color: aquamarine;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 
 .title {
@@ -45,11 +48,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
+  background: url(../assets/cart.jpeg);
+
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
 }
 
 .home-page * {
   text-align: center;
+}
+
+.catalog {
+  /* width: 80vw; */
+  /* background-color: azure; */
+  padding: 1rem;
+  margin-top: 10vh;
 }
 
 .cart-icon {

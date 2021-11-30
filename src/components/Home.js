@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -11,9 +10,6 @@ export default function Home() {
         Select from your favorite brands or try out something different from our
         collection.
       </p>
-      <Link to="/shop">
-        <button className="btn-shop">Shop Now</button>
-      </Link>
     </main>
   );
 }

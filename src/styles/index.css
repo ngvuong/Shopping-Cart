@@ -1,11 +1,13 @@
 body {
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   margin: 0;
   height: 100vh;
-  background: url(../assets/cart.jpeg);
+  /* background: url(../assets/cart.jpeg);
   background-size: cover;
   background-position: 50% 0;
+  background-repeat: no-repeat; */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

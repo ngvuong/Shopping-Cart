@@ -6,6 +6,9 @@ const products = [
   { id: 1, name: "Product1" },
   { id: 2, name: "Product2" },
   { id: 3, name: "Product3" },
+  { id: 4, name: "Product4" },
+  { id: 5, name: "Product5" },
+  { id: 6, name: "Product6" },
 ];
 
 export default function Shop() {
@@ -40,7 +43,7 @@ export default function Shop() {
     );
   });
   return (
-    <div>
+    <main className="catalog">
       Shop
       <Cart
         cartItemCount={cartItemCount}
@@ -48,6 +51,6 @@ export default function Shop() {
         onQtyChange={(qty) => setCartItemCount(qty)}
       />
       <div className="product-list">{productList}</div>
-    </div>
+    </main>
   );
 }
