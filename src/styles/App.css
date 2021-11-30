@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 
 .title {
@@ -45,6 +45,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 80vh;
+}
+
+.home-page * {
+  text-align: center;
 }
 
 .cart-icon {
