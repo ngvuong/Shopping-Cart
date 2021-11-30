@@ -9,12 +9,12 @@ import cart5 from "../assets/cart5.jpg";
 import cart6 from "../assets/cart6.webp";
 
 const products = [
-  { id: 1, name: "Tiny 7 Wheeler", src: cart1 },
-  { id: 2, name: "Product2", src: cart2 },
-  { id: 3, name: "Product3", src: cart3 },
-  { id: 4, name: "Product4", src: cart4 },
-  { id: 5, name: "Product5", src: cart5 },
-  { id: 6, name: "Product6", src: cart6 },
+  { id: 1, name: "Seven Wheeler", src: cart1, price: 50 },
+  { id: 2, name: "Baskets on Wheels", src: cart2, price: 35 },
+  { id: 3, name: "Double Decker", src: cart3, price: 75 },
+  { id: 4, name: "Shop Stroller", src: cart4, price: 99 },
+  { id: 5, name: "Red Cart", src: cart5, price: 999 },
+  { id: 6, name: "Mesh Monster", src: cart6, price: 95 },
 ];
 
 export default function Shop() {
@@ -39,14 +39,7 @@ export default function Shop() {
   };
 
   const productList = products.map((product, i) => {
-    return (
-      <Product
-        key={product.id}
-        name={product.name}
-        product={product}
-        onClick={addItem}
-      />
-    );
+    return <Product key={product.id} product={product} onClick={addItem} />;
   });
   return (
     <main className="catalog">

@@ -16,8 +16,9 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
     const productCount = parseInt(sessionStorage.getItem(`${product.name}`));
 
     return (
-      <div key={product.id}>
+      <div className="cart-item" key={product.id}>
         {product.name}
+        <img src={product.src} alt="" />
         <div className="quantity-field">
           <button
             onClick={(e) => {
@@ -65,7 +66,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
   });
 
   return (
-    <div>
+    <div className="cart-container">
       <div
         className="overlay"
         ref={overlayRef}
@@ -97,6 +98,25 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           !itemCount ? "is empty" : ""
         }`}</h2>
         <div className="cart-items">{cartItems}</div>
+        <div className="checkout">
+          <div className="total">
+            {itemCount
+              ? `Total:
+            ${items.reduce((acc, item, i) => {
+              if (quantityRef.current[i]) {
+                const subTotal = quantityRef.current[i].value * item.price;
+                return acc + subTotal;
+              }
+              return acc;
+            }, 0)}`
+              : ""}
+          </div>
+          {itemCount ? (
+            <button className="btn-check-out">Check Out</button>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

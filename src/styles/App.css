@@ -79,6 +79,12 @@
   /* margin-top: 10vh; */
 }
 
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cart-icon {
   display: flex;
   justify-content: center;
@@ -93,12 +99,15 @@
 }
 
 .cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 50vh;
   height: 100vh;
   position: fixed;
   right: 0;
   top: 0;
-  background-color: rgb(100, 100, 100);
+  background-color: white;
   border: 1px solid black;
   transform: translateX(100%);
   transition: all 0.3s linear;
@@ -110,20 +119,24 @@
 }
 
 .cart-items {
+  height: 50vh;
+  overflow: auto;
+}
+
+.cart-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.btn-close-cart {
-  position: fixed;
-  right: 0;
-  top: 0;
-  font-size: 2rem;
-  cursor: pointer;
+.cart-item img {
+  width: 20%;
 }
 
-input[type="number"]::-webkit-inner-spin-button {
-  appearance: none;
+.quantity-field {
+  display: flex;
+  justify-content: center;
 }
 
 .quantity-field input {
@@ -134,8 +147,35 @@ input[type="number"]::-webkit-inner-spin-button {
   border: none;
 }
 
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+}
+
 .quantity-field button {
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-close-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
   font-size: 2rem;
+  cursor: pointer;
+}
+
+.btn-add-to-cart {
+  font-size: 2rem;
+  font-weight: bold;
+  width: 100%;
+  background-color: #ffcc20;
+  margin: 0.5rem 0 0.5rem 0;
+  border: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 .overlay {
@@ -166,17 +206,20 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
   width: 20rem;
   height: 25rem;
-  border: 1px solid black;
+  border: 5px dotted black;
   background-color: white;
+  border-radius: 10px;
 }
 
 .product-card .image {
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   height: 80%;
   position: relative;
   overflow: hidden;
+  border-bottom: 5px solid black;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .product-card img {
