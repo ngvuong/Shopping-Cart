@@ -66,7 +66,14 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
 
   return (
     <div>
-      <div className="overlay" ref={overlayRef}></div>
+      <div
+        className="overlay"
+        ref={overlayRef}
+        onClick={() => {
+          overlayRef.current.classList.remove("active");
+          cartRef.current.classList.remove("open");
+        }}
+      ></div>
       <div
         className="cart-icon"
         onClick={() => {

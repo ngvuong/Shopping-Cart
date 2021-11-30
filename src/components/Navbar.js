@@ -10,18 +10,20 @@ export default function Navbar() {
       <ul className="nav-links">
         <Link to="/">
           <li
-            onClick={() =>
-              (navRef.current.style.backgroundColor = "transparent")
-            }
+            onClick={() => {
+              navRef.current.style.position = "fixed";
+              navRef.current.style.backgroundColor = "transparent";
+            }}
           >
             Home
           </li>
         </Link>
         <Link to="/shop">
           <li
-            onClick={() =>
-              (navRef.current.style.backgroundColor = "aquamarine")
-            }
+            onClick={() => {
+              navRef.current.style.position = "initial";
+              navRef.current.style.backgroundColor = "aquamarine";
+            }}
           >
             Shop
           </li>
