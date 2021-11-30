@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import cartIcon from "../assets/cart-icon.svg";
 
 export default function Cart({ cartItemCount, products, onQtyChange }) {
   const cartRef = useRef();
@@ -22,6 +23,12 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
         <div className="quantity-field">
           <button
             onClick={(e) => {
+              if (quantityRef.current[i].value > 0) {
+                setItemCount(itemCount - 1);
+                onQtyChange(itemCount - 1);
+                sessionStorage.setItem("count", itemCount - 1);
+                sessionStorage.setItem(`${product.name}`, productCount - 1);
+              }
               if (productCount - 1 === 0) {
                 sessionStorage.removeItem(`${product.name}`);
                 const newCart = items.filter(
@@ -29,13 +36,6 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                 );
                 sessionStorage.setItem("cart", JSON.stringify(newCart));
               }
-              if (quantityRef.current[i].value > 0) {
-                setItemCount(itemCount - 1);
-                onQtyChange(itemCount - 1);
-                sessionStorage.setItem("count", itemCount - 1);
-                sessionStorage.setItem(`${product.name}`, productCount - 1);
-              }
-
               quantityRef.current[i].stepDown();
             }}
           >
@@ -47,6 +47,25 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
             min="0"
             defaultValue={sessionStorage.getItem(`${product.name}`) || 1}
             ref={(el) => (quantityRef.current[i] = el)}
+            onChange={() => {
+              sessionStorage.setItem(
+                `${product.name}`,
+                quantityRef.current[i].value
+              );
+              const totalQty = Object.keys(quantityRef.current).reduce(
+                (acc, key, i) => {
+                  if (quantityRef.current[key]) {
+                    return acc + parseInt(quantityRef.current[key].value);
+                  }
+                  return acc;
+                },
+                0
+              );
+              console.log(totalQty);
+              sessionStorage.setItem("count", parseInt(totalQty));
+              onQtyChange(totalQty);
+              setItemCount(parseInt(totalQty));
+            }}
           />
 
           <button
@@ -82,7 +101,10 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           cartRef.current.classList.add("open");
         }}
       >
-        Cart {itemCount}
+        {/* <div> */}
+        <span>{parseInt(itemCount)}</span>
+        <img src={cartIcon} alt="Shopping cart icon" />
+        {/* </div> */}
       </div>
       <div className="cart" ref={cartRef}>
         <span
@@ -102,7 +124,9 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           <div className="total">
             {itemCount
               ? `Total:
-            ${items.reduce((acc, item, i) => {
+            $${items.reduce((acc, item, i) => {
+              console.log(quantityRef.current);
+              console.log(item);
               if (quantityRef.current[i]) {
                 const subTotal = quantityRef.current[i].value * item.price;
                 return acc + subTotal;

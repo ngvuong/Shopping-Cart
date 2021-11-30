@@ -87,15 +87,29 @@
 
 .cart-icon {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5vmax;
-  height: 5vmax;
+  /* width: 5vmax;
+  height: 5vmax; */
   position: fixed;
   right: 0;
   top: 15vh;
-  border: 1px solid black;
+  padding: 1rem;
   border-radius: 50%;
+}
+
+.cart-icon img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.cart-icon span {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding-top: 0.2rem;
+  border-radius: 50%;
+  background-color: rgb(255, 90, 90);
+  /* vertical-align: top; */
+
+  text-align: center;
 }
 
 .cart {
@@ -172,6 +186,9 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #ffcc20;
   margin: 0.5rem 0 0.5rem 0;
   border: none;
+}
+
+.btn-check-out {
 }
 
 button {
