@@ -10,16 +10,17 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
   useEffect(() => {
     setItemCount(cartItemCount);
   }, [cartItemCount]);
-
+  // Cart items from storage or props
   const items = JSON.parse(sessionStorage.getItem("cart")) || products;
 
   const cartItems = items.map((product, i) => {
+    // Individual product quantity
     const productCount = parseInt(sessionStorage.getItem(`${product.name}`));
-
+    // Input, decrement, and increment for adjusting quantities
     return (
       <div className="cart-item" key={product.id}>
         {product.name}
-        <img src={product.src} alt="" />
+        <img src={product.src} alt={product.name} />
         <div className="quantity-field">
           <button
             onClick={(e) => {
@@ -28,6 +29,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                 sessionStorage.setItem("count", itemCount - 1);
                 sessionStorage.setItem(`${product.name}`, productCount - 1);
               }
+              // Remove and update cart if quantity 0
               if (productCount - 1 === 0) {
                 sessionStorage.removeItem(`${product.name}`);
                 const newCart = items.filter(
@@ -51,8 +53,15 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                 `${product.name}`,
                 quantityRef.current[i].value
               );
+              if (parseInt(quantityRef.current[i].value) === 0) {
+                sessionStorage.removeItem(`${product.name}`);
+                const newCart = items.filter(
+                  (item) => item.name !== product.name
+                );
+                sessionStorage.setItem("cart", JSON.stringify(newCart));
+              }
               const totalQty = Object.keys(quantityRef.current).reduce(
-                (acc, key, i) => {
+                (acc, key) => {
                   if (quantityRef.current[key]) {
                     return acc + parseInt(quantityRef.current[key].value);
                   }

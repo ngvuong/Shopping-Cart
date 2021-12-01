@@ -169,7 +169,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .btn-add-to-cart {
   font-size: 2rem;
   font-weight: bold;
-  width: 100%;
+  width: 80%;
   background-color: #ffcc20;
   margin: 0.5rem 0 0.5rem 0;
   border: none;
@@ -194,7 +194,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.btn-add-to-cart:hover,
+.btn-check-out:hover {
   box-shadow: 0 0 1rem black;
 }
 
@@ -228,6 +229,7 @@ button:hover {
   height: 25rem;
   border-radius: 10px;
   background-color: white;
+  box-shadow: 0 0 5px black;
 }
 .product-card:hover {
   background: linear-gradient(90deg, black 50%, transparent 50%),
@@ -236,7 +238,6 @@ button:hover {
     linear-gradient(0deg, black 50%, transparent 50%);
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   background-size: 20px 2px, 20px 2px, 2px 20px, 2px 20px;
-  padding: 10px;
   background-color: white;
   animation: border-dance 4s infinite linear;
 }
@@ -253,11 +254,15 @@ button:hover {
 .product-card .image {
   display: flex;
   justify-content: center;
-  width: 100%;
-  position: relative;
+  width: 80%;
+  height: 100%;
   overflow: hidden;
   border-bottom: 5px solid black;
   margin: 0.5rem 0 0.5rem 0;
+}
+
+.product-card img {
+  width: 80%;
 }
 
 .product-card img:hover {

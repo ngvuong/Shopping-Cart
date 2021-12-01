@@ -3,7 +3,7 @@ export default function Product({ product, onClick }) {
     <div className="product-card">
       <h2 className="product">{product.name}</h2>
       <div className="image">
-        <img src={product.src} alt="" />
+        <img src={product.src} alt={product.name} />
       </div>
       <div className="price">${product.price}</div>
       <button className="btn-add-to-cart" onClick={() => onClick(product)}>

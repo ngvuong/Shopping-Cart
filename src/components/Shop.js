@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Cart from "./Cart";
 import Product from "./Product";
+
 import cart1 from "../assets/cart1.webp";
 import cart2 from "../assets/cart2.webp";
 import cart3 from "../assets/cart3.jpg";
@@ -23,6 +24,7 @@ export default function Shop() {
   const [cartItemCount, setCartItemCount] = useState(itemCountInStore || 0);
   const [cartItems, setCartItems] = useState([]);
 
+  // Adjust navbar on shop page on page reload
   useEffect(() => {
     window.onload = () => {
       const navBar = document.querySelector(".navbar");
@@ -30,6 +32,7 @@ export default function Shop() {
     };
   }, []);
 
+  // Add new item to cart, callback passed to Product
   const addItem = (product) => {
     setCartItems(cartItemsInStore);
     const isInCart = cartItemsInStore.some((item) => item.id === product.id);
@@ -48,11 +51,13 @@ export default function Shop() {
   const productList = products.map((product, i) => {
     return <Product key={product.id} product={product} onClick={addItem} />;
   });
+
   return (
     <main className="catalog">
       <Cart
         cartItemCount={cartItemCount}
         products={cartItems}
+        // Callback to update quantity, single source of true quantity
         onQtyChange={(qty) => setCartItemCount(qty)}
       />
       <div className="product-list">{productList}</div>
