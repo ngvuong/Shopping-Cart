@@ -24,7 +24,6 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           <button
             onClick={(e) => {
               if (quantityRef.current[i].value > 0) {
-                setItemCount(itemCount - 1);
                 onQtyChange(itemCount - 1);
                 sessionStorage.setItem("count", itemCount - 1);
                 sessionStorage.setItem(`${product.name}`, productCount - 1);
@@ -70,7 +69,6 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
 
           <button
             onClick={(e) => {
-              setItemCount(itemCount + 1);
               quantityRef.current[i].stepUp();
               onQtyChange(itemCount + 1);
               sessionStorage.setItem("count", itemCount + 1);
@@ -101,10 +99,8 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           cartRef.current.classList.add("open");
         }}
       >
-        {/* <div> */}
-        <span>{parseInt(itemCount)}</span>
+        {itemCount ? <span>{parseInt(itemCount)}</span> : ""}
         <img src={cartIcon} alt="Shopping cart icon" />
-        {/* </div> */}
       </div>
       <div className="cart" ref={cartRef}>
         <span
@@ -124,15 +120,16 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
           <div className="total">
             {itemCount
               ? `Total:
-            $${items.reduce((acc, item, i) => {
-              console.log(quantityRef.current);
-              console.log(item);
-              if (quantityRef.current[i]) {
-                const subTotal = quantityRef.current[i].value * item.price;
-                return acc + subTotal;
-              }
-              return acc;
-            }, 0)}`
+            $${
+              items.reduce((acc, item, i) => {
+                if (quantityRef.current[i]) {
+                  const subTotal = quantityRef.current[i].value * item.price;
+                  sessionStorage.setItem("total", acc + subTotal);
+                  return acc + subTotal;
+                }
+                return acc;
+              }, 0) || parseInt(sessionStorage.getItem("total"))
+            }`
               : ""}
           </div>
           {itemCount ? (
