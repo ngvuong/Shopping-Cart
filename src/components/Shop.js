@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cart from "./Cart";
 import Product from "./Product";
 import cart1 from "../assets/cart1.webp";
@@ -23,6 +23,13 @@ export default function Shop() {
   const [cartItemCount, setCartItemCount] = useState(itemCountInStore || 0);
   const [cartItems, setCartItems] = useState([]);
 
+  useEffect(() => {
+    window.onload = () => {
+      const navBar = document.querySelector(".navbar");
+      navBar.classList.add("shop-page");
+    };
+  }, []);
+
   const addItem = (product) => {
     setCartItems(cartItemsInStore);
     const isInCart = cartItemsInStore.some((item) => item.id === product.id);
@@ -43,7 +50,6 @@ export default function Shop() {
   });
   return (
     <main className="catalog">
-      Shop
       <Cart
         cartItemCount={cartItemCount}
         products={cartItems}

@@ -60,10 +60,8 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
                 },
                 0
               );
-              console.log(totalQty);
               sessionStorage.setItem("count", parseInt(totalQty));
               onQtyChange(totalQty);
-              setItemCount(parseInt(totalQty));
             }}
           />
 
@@ -82,16 +80,14 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
     );
   });
 
+  const closeCart = () => {
+    overlayRef.current.classList.remove("active");
+    cartRef.current.classList.remove("open");
+  };
+
   return (
     <div className="cart-container">
-      <div
-        className="overlay"
-        ref={overlayRef}
-        onClick={() => {
-          overlayRef.current.classList.remove("active");
-          cartRef.current.classList.remove("open");
-        }}
-      ></div>
+      <div className="overlay" ref={overlayRef} onClick={closeCart}></div>
       <div
         className="cart-icon"
         onClick={() => {
@@ -103,13 +99,7 @@ export default function Cart({ cartItemCount, products, onQtyChange }) {
         <img src={cartIcon} alt="Shopping cart icon" />
       </div>
       <div className="cart" ref={cartRef}>
-        <span
-          className="btn-close-cart"
-          onClick={() => {
-            overlayRef.current.classList.remove("active");
-            cartRef.current.classList.remove("open");
-          }}
-        >
+        <span className="btn-close-cart" onClick={closeCart}>
           &#10006;
         </span>
         <h2 className="cart-heading">{`Your Cart ${

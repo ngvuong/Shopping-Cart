@@ -1,7 +1,7 @@
 export default function Product({ product, onClick }) {
   return (
     <div className="product-card">
-      <div className="product">{product.name}</div>
+      <h2 className="product">{product.name}</h2>
       <div className="image">
         <img src={product.src} alt="" />
       </div>
