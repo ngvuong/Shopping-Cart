@@ -22,7 +22,7 @@ export default function Shop() {
   const itemCountInStore = parseInt(sessionStorage.getItem("count"));
   const cartItemsInStore = JSON.parse(sessionStorage.getItem("cart")) || [];
   const [cartItemCount, setCartItemCount] = useState(itemCountInStore || 0);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(cartItemsInStore || []);
 
   // Adjust navbar on shop page on page reload
   useEffect(() => {
@@ -35,16 +35,18 @@ export default function Shop() {
   // Add new item to cart, callback passed to Product
   const addItem = (product) => {
     setCartItems(cartItemsInStore);
-    const isInCart = cartItemsInStore.some((item) => item.id === product.id);
+    const isInCart = cartItemsInStore.some(
+      (item) => item.name === product.name
+    );
     if (!isInCart) {
       setCartItems((items) => {
         const newCart = [...items, product];
         sessionStorage.setItem("cart", JSON.stringify(newCart));
         sessionStorage.setItem(`${product.name}`, 1);
+        sessionStorage.setItem("count", cartItemCount + 1);
+        setCartItemCount(cartItemCount + 1);
         return newCart;
       });
-      setCartItemCount(cartItemCount + 1);
-      sessionStorage.setItem("count", cartItemCount + 1);
     }
   };
 
